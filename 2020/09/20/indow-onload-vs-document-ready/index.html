@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>window.onload vs. $(document).ready | Hai Script</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="距離第一篇已經好久了💧第一篇筆記先從很常遇到的兩個事件window.onload和$(document).ready開始介紹！ window.onload 與 $(document).ready() 的差異window.onload JavaScript的原生事件 會等網頁的所有資源，例如圖片、CSS、scripts及&lt;iframe&gt;等外部內容載入後才會觸發。也就是整個網頁下載完後才">
+<meta property="og:type" content="article">
+<meta property="og:title" content="window.onload vs. $(document).ready">
+<meta property="og:url" content="https://ke-en.github.io/haipage/2020/09/20/indow-onload-vs-document-ready/index.html">
+<meta property="og:site_name" content="Hai Script">
+<meta property="og:description" content="距離第一篇已經好久了💧第一篇筆記先從很常遇到的兩個事件window.onload和$(document).ready開始介紹！ window.onload 與 $(document).ready() 的差異window.onload JavaScript的原生事件 會等網頁的所有資源，例如圖片、CSS、scripts及&lt;iframe&gt;等外部內容載入後才會觸發。也就是整個網頁下載完後才">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-09-20T09:05:52.000Z">
+<meta property="article:modified_time" content="2020-09-20T16:09:14.586Z">
+<meta property="article:author" content="Hai">
+<meta property="article:tag" content="Hai blog">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/haipage/atom.xml" title="Hai Script" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/haipage/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/haipage/" id="logo">Hai Script</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/haipage/">Home</a>
+        
+          <a class="main-nav-link" href="/haipage/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/haipage/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://ke-en.github.io/haipage"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-indow-onload-vs-document-ready" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/haipage/2020/09/20/indow-onload-vs-document-ready/" class="article-date">
+  <time datetime="2020-09-20T09:05:52.000Z" itemprop="datePublished">2020-09-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      window.onload vs. $(document).ready
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>距離第一篇已經好久了💧<br>第一篇筆記先從很常遇到的兩個事件<a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload" target="_blank" rel="noopener"><code>window.onload</code></a>和<a href="https://learn.jquery.com/using-jquery-core/document-ready/" target="_blank" rel="noopener"><code>$(document).ready</code></a>開始介紹！</p>
+<h2 id="window-onload-與-document-ready-的差異"><a href="#window-onload-與-document-ready-的差異" class="headerlink" title="window.onload 與 $(document).ready() 的差異"></a>window.onload 與 $(document).ready() 的差異</h2><h3 id="window-onload"><a href="#window-onload" class="headerlink" title="window.onload"></a><code>window.onload</code></h3><ul>
+<li>JavaScript的原生事件</li>
+<li>會等網頁的<strong>所有資源</strong>，例如圖片、CSS、scripts及<code>&lt;iframe&gt;</code>等外部內容載入後才會觸發。也就是整個網頁下載完後才會執行。</li>
+<li><strong>複寫特性</strong>: 若定義了重複的window.onload事件的話，後一個的內容會覆蓋掉前一個的，導致前一個的執行內容失敗，所以一頁只能定義一次。</li>
+</ul>
+<h3 id="document-ready"><a href="#document-ready" class="headerlink" title="$(document).ready"></a><code>$(document).ready</code></h3><ul>
+<li>jQuery的事件</li>
+<li>在<strong>DOM載入</strong>後就會觸發，也就是當 document 物件下所有 DOM 物件都可以正確取得時，就會觸發 <a href="https://api.jquery.com/ready/" target="_blank" rel="noopener">jQuery.ready()</a> 註冊的 function。</li>
+<li>需要在 <code>window.onload</code> 事件前註冊好，否則會變成要等到網頁所有資源都下載完畢才會執行 <code>$(document).ready()</code> 中註冊的事件</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="window-onload-與-document-ready-的使用"><a href="#window-onload-與-document-ready-的使用" class="headerlink" title="window.onload 與 $(document).ready() 的使用"></a>window.onload 與 $(document).ready() 的使用</h2><h3 id="window-onload的用法"><a href="#window-onload的用法" class="headerlink" title="window.onload的用法"></a><code>window.onload</code>的用法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"window loaded"</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="document-ready-的用法"><a href="#document-ready-的用法" class="headerlink" title="$(document).ready()的用法"></a><code>$(document).ready()</code>的用法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"docuemnt ready"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 可簡寫成</span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"docuemnt ready"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>也可傳入一個已命名好的function:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Passing a named function instead of an anonymous function.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readyFn</span>(<span class="params"> jQuery </span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Code to run when the document is ready.</span></span><br><span class="line">&#125;</span><br><span class="line">$( <span class="built_in">document</span> ).ready( readyFn );</span><br><span class="line"><span class="comment">// or:</span></span><br><span class="line">$( <span class="built_in">window</span> ).on( <span class="string">"load"</span>, readyFn );</span><br></pre></td></tr></table></figure>
+<h4 id="延伸閱讀"><a href="#延伸閱讀" class="headerlink" title="延伸閱讀"></a>延伸閱讀</h4><blockquote>
+<p>“load 事件是在網頁「所有」資源都已經載入完成後才會觸發<br>DOMContentLoaded 事件是在 DOM 結構被完整的讀取跟解析後就會被觸發”</p>
+</blockquote>
+<p>Kuro大大的文章：<a href="https://ithelp.ithome.com.tw/articles/10197335" target="_blank" rel="noopener">重新認識 JavaScript 番外篇 (6) - 網頁的生命週期</a></p>
+<h4 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h4><ul>
+<li><a href="https://blog.miniasp.com/post/2010/07/24/jQuery-ready-vs-load-vs-window-onload-event" target="_blank" rel="noopener">使用 jQuery(document).ready() 與 window.onload 注意事項</a></li>
+<li><a href="https://matthung0807.blogspot.com/2018/02/javascript-windowonload-jquery.html" target="_blank" rel="noopener">JavaScript window.onload 和 jQuery $(document).ready() 的差異</a></li>
+<li><a href="https://ithelp.ithome.com.tw/articles/10092601" target="_blank" rel="noopener">jQuery 筆記 (四) window.onload 與 $(document).ready</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ke-en.github.io/haipage/2020/09/20/indow-onload-vs-document-ready/" data-id="ckfbaw7zy0000kgv0hzv0erbt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/haipage/2020/05/24/First-Post/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">First Post</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/haipage/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/haipage/archives/2020/05/">五月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/haipage/2020/09/20/indow-onload-vs-document-ready/">window.onload vs. $(document).ready</a>
+          </li>
+        
+          <li>
+            <a href="/haipage/2020/05/24/First-Post/">First Post</a>
+          </li>
+        
+          <li>
+            <a href="/haipage/2020/05/24/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Hai<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/haipage/" class="mobile-nav-link">Home</a>
+  
+    <a href="/haipage/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/haipage/fancybox/jquery.fancybox.css">
+
+  
+<script src="/haipage/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/haipage/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
